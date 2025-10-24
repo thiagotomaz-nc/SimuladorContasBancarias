@@ -201,9 +201,12 @@ public class ContaPoupancaGUI extends javax.swing.JDialog {
 
         if (!txtNomeContaPoupanca.getText().trim().toUpperCase().isEmpty() && !txtSaldoContaPoupanca.getText().trim().isEmpty() && !txtSaldoContaPoupaca.getText().trim().isEmpty()) {
             if (txtNumeroDaConta.getText().trim().length() == 8) {
-                double saldo = Double.parseDouble(txtSaldoContaPoupanca.getText().trim().replace("R$", "").replace(".", "").replace(",", "."));
-                double saldoDaPoupanca = Double.parseDouble(txtSaldoContaPoupaca.getText().trim().replace("R$", "").replace(".", "").replace(",", "."));
+                double saldo = Double.parseDouble(txtSaldoContaPoupanca.getText().trim().replace("R$", "").replace(" ","").replace(".", "").replace(",", "."));
+                double saldoDaPoupanca = Double.parseDouble(txtSaldoContaPoupaca.getText().trim().replace("R$", "").replace(" ","").replace(".", "").replace(",", "."));
 
+                if (saldo==0) saldo=0;
+                if (saldoDaPoupanca==0) saldoDaPoupanca = 0;
+                
                 if (saldo >= 0 && saldoDaPoupanca >= 0) {
                     cp = new ContaPoupanca();
                     cp.setNumeroConta(txtNumeroDaConta.getText().trim());

@@ -60,7 +60,7 @@ public class OperacoesBancarias {
     public void debitarContaCorrente(ContaCorrente contaCorrente, double valorDebito) {
         if (verificarSaldoSuficiente(contaCorrente, valorDebito)) {
             contaCorrente.debitar(valorDebito);
-            JOptionPane.showMessageDialog(null, "Débito realizado com sucesso\nTitular: "+contaCorrente.getNome()+"\nNúmero da conta: [ "+contaCorrente.getSaldo()+" ]");  
+            JOptionPane.showMessageDialog(null, "Débito realizado com sucesso\nTitular: "+contaCorrente.getNome()+"\nNúmero da conta: [ "+contaCorrente.getNumeroConta()+" ]");  
 
         } else {
            JOptionPane.showMessageDialog(null,"Saldo insificiente para debitar na conta corrente.");

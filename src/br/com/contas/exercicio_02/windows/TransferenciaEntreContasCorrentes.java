@@ -193,18 +193,21 @@ public class TransferenciaEntreContasCorrentes extends javax.swing.JDialog {
             if (txtNumeroDaContaOrigem.getText().trim().length() == 8 && txtNumeroDaContaDestino.getText().trim().length()==8) {
 
                 //implementar o NumberFormat para trabalhar com moedas
-                String tempValor = txtValorTransferencia.getText().trim().replace("R$","").replace(".", "").replace(",", ".");
+                String tempValor = txtValorTransferencia.getText().trim().replace("R$","").replace(" ", "").replace(".", "").replace(",", ".");
 
                 double valorTransferencia = Double.parseDouble(tempValor);
-
-                if (valorTransferencia >= 0) {
+                
+                if (valorTransferencia==0) valorTransferencia=0;
+               
+                // só existe uma transferencia acima de 0 reais.
+                if (valorTransferencia > 0) {
                     numeroContaOrigem = txtNumeroDaContaOrigem.getText().trim();
                     numeroContaDestino = txtNumeroDaContaDestino.getText().trim();
                     this.valorTransferencia = valorTransferencia;
                     
                     dispose();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Por favor, preencha o saldo com valor a partir de R$ 0 reais!");
+                    JOptionPane.showMessageDialog(null, "Por favor, preencha o saldo com valor acima de R$ 0 reais!");
 
                 }
             }else {

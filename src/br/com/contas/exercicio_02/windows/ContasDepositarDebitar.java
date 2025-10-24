@@ -24,9 +24,9 @@ public class ContasDepositarDebitar extends javax.swing.JDialog {
     private int tipoOperacao;
 
     public ContasDepositarDebitar(String iconeLaunch, boolean modal, int tipoOperacao) {
-       
-          initComponents();
-         setIconImage(Toolkit.getDefaultToolkit().getImage(iconeLaunch));
+
+        initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(iconeLaunch));
         numeroDaConta = null;
         valorCreditado = 0;
         this.tipoOperacao = tipoOperacao;
@@ -39,15 +39,15 @@ public class ContasDepositarDebitar extends javax.swing.JDialog {
                 lgdDepositoDebito.setText("Valor a débitar:");
                 break;
             case 3:
-                 setTitle(getTitle() + " | Debitar");
-                 lgdDepositoDebito.setText("Valor a débitar:");
+                setTitle(getTitle() + " | Debitar");
+                lgdDepositoDebito.setText("Valor a débitar:");
                 break;
             case 4:
-                 setTitle(getTitle() + " | Debitar do saldo da poupança para a conta");
-                 lgdDepositoDebito.setText("Valor do saldo da poupança:");
-            break;
+                setTitle(getTitle() + " | Debitar do saldo da poupança para a conta");
+                lgdDepositoDebito.setText("Valor do saldo da poupança:");
+                break;
             case 5:
-                 setTitle("Conta Corrente | Depositar");
+                setTitle("Conta Corrente | Depositar");
                 break;
             case 6:
                 setTitle("Conta Corrente | Debitar");
@@ -182,8 +182,18 @@ public class ContasDepositarDebitar extends javax.swing.JDialog {
         if (!txtSaldoContaPoupanca.getText().trim().isEmpty()) {
             if (txtNumeroDaConta.getText().trim().length() == 8) {
                 numeroDaConta = txtNumeroDaConta.getText().trim();
-                valorCreditado = Double.parseDouble(txtSaldoContaPoupanca.getText().trim().replace("R$", "").replace(".", "").replace(",", "."));
-                dispose();
+                valorCreditado = Double.parseDouble(txtSaldoContaPoupanca.getText().trim().replace("R$", "").replace(" ", "").replace(".", "").replace(",", "."));
+                
+                if(valorCreditado==0) valorCreditado=0;
+                
+               if (valorCreditado > 0) {
+                    dispose();
+                } else {
+                    valorCreditado = 0;
+                    numeroDaConta = null;
+                    JOptionPane.showMessageDialog(null, "Por favor, preencha campo [ "+lgdDepositoDebito.getText()+" ] com valor acima de R$ 0 reais!");
+                }
+
             } else {
                 JOptionPane.showMessageDialog(this, "O campo numero da conta tem que estar completamente preenchido");
                 txtNumeroDaConta.setBorder(new LineBorder(Color.RED, 2));

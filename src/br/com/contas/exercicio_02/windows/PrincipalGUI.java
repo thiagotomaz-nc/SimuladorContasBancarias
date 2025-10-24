@@ -8,8 +8,11 @@ package br.com.contas.exercicio_02.windows;
 import br.com.contas.exercicio_02.classes.ContaCorrente;
 import br.com.contas.exercicio_02.classes.ContaPoupanca;
 import br.com.contas.exercicio_02.classes.OperacoesBancarias;
+import br.com.contas.exercicio_02.table_models.CorrenteTableDefaultRender;
+import br.com.contas.exercicio_02.table_models.PoupancaTableDefaultRender;
 import br.com.contas.exercicio_02.table_models.CorrenteTableModel;
 import br.com.contas.exercicio_02.table_models.PoupancaTableModel;
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,7 +46,9 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private int countPoupanca;
     private int countCorrente;
     private LocalDateTime dataLocal;
-
+    private final String MENSAGEM_POUPANCA_SC_CP = "Transferência bloqueada SC -> SP";
+    private final String MENSAGEM_POUPANCA_SP_SC = "Transferência bloqueada SP -> SC";
+ 
     public PrincipalGUI() {
         
         
@@ -86,7 +91,12 @@ public class PrincipalGUI extends javax.swing.JFrame {
          dataLocal = LocalDateTime.now();
          atualizarDataHora(dataLocal);
          startRelogio();
+         
+        tabelaContaCorrente.setDefaultRenderer(Object.class, new CorrenteTableDefaultRender());
+        tabelaContaPounca.setDefaultRenderer(Object.class, new PoupancaTableDefaultRender());
         
+        //
+        legendasAmarelasIsVisibleMensagem(Color.ORANGE,MENSAGEM_POUPANCA_SC_CP, MENSAGEM_POUPANCA_SP_SC);
     }
 
     /**
@@ -112,6 +122,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
         numeroDaConta = new javax.swing.JFormattedTextField();
         lgdContasTipos = new javax.swing.JLabel();
         lgdCountContas = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         painelGuiaContas = new javax.swing.JTabbedPane();
         scrollContaPoupanca = new javax.swing.JScrollPane();
         tabelaContaPounca = new javax.swing.JTable();
@@ -120,6 +131,11 @@ public class PrincipalGUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         lgdHorario = new javax.swing.JLabel();
         lgdDataHora = new javax.swing.JLabel();
+        lgdContaNoVermelho = new javax.swing.JLabel();
+        lgdContaNoVermelhoTexto = new javax.swing.JLabel();
+        lgdAmarela = new javax.swing.JLabel();
+        lgdAmarelaTexto = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         MnPoupanca = new javax.swing.JMenuItem();
@@ -195,7 +211,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
 
         jPanel1.setMinimumSize(new java.awt.Dimension(100, 40));
 
-        btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/contas/exercicio_02/assets/icones_32/seacher.png"))); // NOI18N
+        btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icones_32/seacher.png"))); // NOI18N
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisarActionPerformed(evt);
@@ -220,6 +236,13 @@ public class PrincipalGUI extends javax.swing.JFrame {
         lgdCountContas.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lgdCountContas.setText("0 ");
 
+        jButton1.setText("Limpar seleção");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -237,7 +260,9 @@ public class PrincipalGUI extends javax.swing.JFrame {
                 .addComponent(numeroDaConta, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(307, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,15 +270,16 @@ public class PrincipalGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lgdContasTipos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lgdCountContas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(DivisorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(numeroDaConta)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(lgdCountContas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(numeroDaConta))
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -337,27 +363,66 @@ public class PrincipalGUI extends javax.swing.JFrame {
         lgdHorario.setText("Horário:");
 
         lgdDataHora.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lgdDataHora.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lgdDataHora.setText("21-10-2025");
+
+        lgdContaNoVermelho.setBackground(new java.awt.Color(255, 0, 0));
+        lgdContaNoVermelho.setOpaque(true);
+
+        lgdContaNoVermelhoTexto.setText("Bloqueada para débito e transferência");
+
+        lgdAmarela.setBackground(new java.awt.Color(255, 255, 0));
+        lgdAmarela.setOpaque(true);
+
+        lgdAmarelaTexto.setText("Próxima do limite da conta corrente");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setText("Legendas:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lgdHorario)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lgdDataHora, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(lgdContaNoVermelho, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lgdContaNoVermelhoTexto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lgdAmarela, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lgdAmarelaTexto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 283, Short.MAX_VALUE)
+                .addComponent(lgdHorario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lgdDataHora, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(lgdContaNoVermelho, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lgdContaNoVermelhoTexto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lgdAmarela, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+                            .addComponent(lgdAmarelaTexto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lgdHorario)
-                    .addComponent(lgdDataHora))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lgdDataHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lgdHorario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Cadastro");
@@ -465,8 +530,8 @@ public class PrincipalGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(painelGuiaContas, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(painelGuiaContas, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -605,12 +670,12 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         if (tabelaContaCorrente.getRowCount() > 0) {
 
-            ContasDepositarDebitar operacoesContaPoupanca = new ContasDepositarDebitar(ICONE_LAUNCH, true, 6);
-            operacoesContaPoupanca.setModal(true);
-            operacoesContaPoupanca.setVisible(true);
+            ContasDepositarDebitar operacoesContas = new ContasDepositarDebitar(ICONE_LAUNCH, true, 6);
+            operacoesContas.setModal(true);
+            operacoesContas.setVisible(true);
 
-            String numerodaconta = operacoesContaPoupanca.getNumeroDaConta();
-            double valorDeposito = operacoesContaPoupanca.getValorCreditado();
+            String numerodaconta = operacoesContas.getNumeroDaConta();
+            double valorDeposito = operacoesContas.getValorCreditado();
 
             if (numerodaconta != null && valorDeposito != 0) {
                 if (correnteTableModel.verificarChaveContaCorrente(numerodaconta)) {
@@ -706,13 +771,14 @@ public class PrincipalGUI extends javax.swing.JFrame {
         int tipoConta = tipoContaGUI.getTipoConta();
 
         if (!(tipoConta < 0)) {
+             painelGuiaContas.setSelectedIndex(tipoConta);
             if (tipoConta == 0) {
                 contaPoupancaGUI(null, true);
             } else if (tipoConta == 1) {
                 contaCorrenteGUI(null, true);
             }
 
-            painelGuiaContas.setSelectedIndex(tipoConta);
+           
         }
 
 
@@ -744,8 +810,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private void painelGuiaContasStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_painelGuiaContasStateChanged
         limparSelecaoTabelas();
         atualizarCountContas(0);
-
-
+       
     }//GEN-LAST:event_painelGuiaContasStateChanged
 
     private void scrollContaCorrenteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scrollContaCorrenteMouseClicked
@@ -787,6 +852,11 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private void painelGuiaContasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_painelGuiaContasMouseClicked
 
     }//GEN-LAST:event_painelGuiaContasMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+       limparSelecaoTabelas();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -838,8 +908,10 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnEditarConta;
     private javax.swing.JButton btnExcluirConta;
     private javax.swing.JButton btnPesquisar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -855,6 +927,10 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel lgdAmarela;
+    private javax.swing.JLabel lgdAmarelaTexto;
+    private javax.swing.JLabel lgdContaNoVermelho;
+    private javax.swing.JLabel lgdContaNoVermelhoTexto;
     private javax.swing.JLabel lgdContasTipos;
     private javax.swing.JLabel lgdCountContas;
     private javax.swing.JLabel lgdDataHora;
@@ -928,8 +1004,13 @@ public class PrincipalGUI extends javax.swing.JFrame {
     }
 
     private void limparSelecaoTabelas() {
-        tabelaContaCorrente.clearSelection();
-        tabelaContaPounca.clearSelection();
+        if(painelGuiaContas.getSelectedIndex()==0){
+            tabelaContaPounca.clearSelection();
+        }else{
+            tabelaContaCorrente.clearSelection();
+        }
+        
+        
         btnEditarConta.setEnabled(false);
         btnExcluirConta.setEnabled(false);
     }
@@ -970,11 +1051,13 @@ public class PrincipalGUI extends javax.swing.JFrame {
             // aqui tem que tomar cuidado, pois no contrutor o componente tabbepane é criando antes de se instanciar a classe poupancaTableModel e correntTableModel
             countPoupanca += incrementoDecremento;
             lgdCountContas.setText(countPoupanca + "");
+             legendasAmarelasIsVisibleMensagem(Color.ORANGE, MENSAGEM_POUPANCA_SC_CP,MENSAGEM_POUPANCA_SP_SC);
         } else {
             lgdContasTipos.setText("Contas correntes: ");
             // aqui tem que tomar cuidado, pois no contrutor o componente tabbepane é criando antes de se instanciar a classe poupancaTableModel e correntTableModel
             countCorrente+=incrementoDecremento;
             lgdCountContas.setText(countCorrente + "");
+            legendasAmarelasIsVisibleMensagem(Color.YELLOW,"Bloqueada para débito e transferência" ,"Próxima do limite da conta corrente");
         }
     }
     
@@ -993,6 +1076,12 @@ public class PrincipalGUI extends javax.swing.JFrame {
         });
         
         relogio.start();
+    }
+
+    private void legendasAmarelasIsVisibleMensagem(Color b, String mensagemLegendaVermelha,String mensagemLegendaAmarela) {
+        lgdContaNoVermelhoTexto.setText(mensagemLegendaVermelha);
+        lgdAmarela.setBackground(b);
+        lgdAmarelaTexto.setText(mensagemLegendaAmarela);
     }
 
 }

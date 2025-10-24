@@ -212,9 +212,13 @@ public class ContaCorrenteGUI extends javax.swing.JDialog {
             if (txtNumeroDaConta.getText().trim().length() == 8) {
                 
                 //implementar o NumberFormat para trabalhar com moedas
-                String tempValor = txtSaldoContaCorrente.getText().trim().replace("R$","").replace(".", "").replace(",", ".");
+                String tempValor = txtSaldoContaCorrente.getText().trim().replace("R$","").replace(" ", "").replace(".", "").replace(",", ".");
                              
                 double saldo = Double.parseDouble(tempValor);
+                
+                // Correção caso o usuario digite -0, por acidente ou para testar o simulador
+                // Esse caso ocorreu comigo e pesquisando descrobri essa tecnica
+                if (saldo == 0 ) saldo=0;
                 
                 if (saldo >= 0) {
                     cc = new ContaCorrente();

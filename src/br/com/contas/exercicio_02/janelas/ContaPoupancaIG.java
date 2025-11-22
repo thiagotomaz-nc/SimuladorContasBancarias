@@ -1,9 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *Componentes:
+*   Emanuel Basílio da Silva (20251134040033) 
+    Matheus do Nascimento da Silva (20251134040023)
+    RENATO ARAUJO GRILO (20251134040018)
+    Thiago Tomaz de Araújo (20251134040031)
  */
-package br.com.contas.exercicio_02.windows;
+package br.com.contas.exercicio_02.janelas;
 
 import br.com.contas.exercicio_02.classes.ContaPoupanca;
 import java.awt.Color;
@@ -15,17 +17,14 @@ import javax.swing.border.LineBorder;
 
 /**
  *
- * @author thiago
+ * @author Thiago Tomaz
  */
-public class ContaPoupancaGUI extends javax.swing.JDialog {
 
-    /**
-     * Creates new form contaPoupanca
-     */
-    
-    private NumberFormat formatoMoedaBrasil;
+public class ContaPoupancaIG extends javax.swing.JDialog {
+
+     private NumberFormat formatoMoedaBrasil;
        
-    public ContaPoupancaGUI(String iconeLaunch, Locale localBrasil) {
+    public ContaPoupancaIG(String iconeLaunch, Locale localBrasil) {
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(iconeLaunch));
         formatoMoedaBrasil = NumberFormat.getCurrencyInstance(localBrasil);

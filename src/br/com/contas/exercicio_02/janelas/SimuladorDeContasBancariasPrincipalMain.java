@@ -1,9 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *Componentes:
+*   Emanuel Basílio da Silva (20251134040033) 
+    Matheus do Nascimento da Silva (20251134040023)
+    RENATO ARAUJO GRILO (20251134040018)
+    Thiago Tomaz de Araújo (20251134040031)
  */
-package br.com.contas.exercicio_02.windows;
+package br.com.contas.exercicio_02.janelas;
 
 import br.com.contas.exercicio_02.classes.ContaCorrente;
 import br.com.contas.exercicio_02.classes.ContaPoupanca;
@@ -12,28 +14,21 @@ import br.com.contas.exercicio_02.table_models.CorrenteTableDefaultRender;
 import br.com.contas.exercicio_02.table_models.PoupancaTableDefaultRender;
 import br.com.contas.exercicio_02.table_models.CorrenteTableModel;
 import br.com.contas.exercicio_02.table_models.PoupancaTableModel;
-import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.sql.Time;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.Locale;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.table.TableColumnModel;
 
 /**
  *
- * @author thiago
+ * @author Thiago Tomaz
  */
-public class PrincipalGUI extends javax.swing.JFrame {
+public class SimuladorDeContasBancariasPrincipalMain extends javax.swing.JFrame {
 
     /**
      * Creates new form Principal
@@ -46,12 +41,9 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private int countPoupanca;
     private int countCorrente;
     private LocalDateTime dataLocal;
-    private final String MENSAGEM_POUPANCA_SC_CP = "Transferência bloqueada SC -> SP";
-    private final String MENSAGEM_POUPANCA_SP_SC = "Transferência bloqueada SP -> SC";
- 
-    public PrincipalGUI() {
-        
-        
+
+    public SimuladorDeContasBancariasPrincipalMain() {
+
         countPoupanca = 0;
         countCorrente = 0;
         initComponents();
@@ -86,17 +78,15 @@ public class PrincipalGUI extends javax.swing.JFrame {
         modeloColunasCorrente.getColumn(4).setMaxWidth(350);
 
         //**** obs.: NÃO precisei desativar o AUTO_RESEZI (redimensionamento automatico) das tabelas;
-        
         //configurações da data e hora
-         dataLocal = LocalDateTime.now();
-         atualizarDataHora(dataLocal);
-         startRelogio();
-         
+        dataLocal = LocalDateTime.now();
+        atualizarDataHora(dataLocal);
+        startRelogio();
+
         tabelaContaCorrente.setDefaultRenderer(Object.class, new CorrenteTableDefaultRender());
         tabelaContaPounca.setDefaultRenderer(Object.class, new PoupancaTableDefaultRender());
-        
+
         //
-        legendasAmarelasIsVisibleMensagem(Color.ORANGE,MENSAGEM_POUPANCA_SC_CP, MENSAGEM_POUPANCA_SP_SC);
     }
 
     /**
@@ -136,6 +126,8 @@ public class PrincipalGUI extends javax.swing.JFrame {
         lgdAmarela = new javax.swing.JLabel();
         lgdAmarelaTexto = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        lgdLaranja = new javax.swing.JLabel();
+        lgdaranjaTexto = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         MnPoupanca = new javax.swing.JMenuItem();
@@ -148,7 +140,12 @@ public class PrincipalGUI extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        jMenu3 = new javax.swing.JMenu();
+        mnTransferenciaEntreCorrentes = new javax.swing.JMenuItem();
+        mnTransferenciaCorrentePoupanca = new javax.swing.JMenuItem();
+        mnTransferenciaPoupancaCorrente = new javax.swing.JMenuItem();
+        mnTransferenciaEntrePoupancas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sistemas de contas Bancarias");
@@ -262,7 +259,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
                 .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(319, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,17 +364,25 @@ public class PrincipalGUI extends javax.swing.JFrame {
         lgdDataHora.setText("21-10-2025");
 
         lgdContaNoVermelho.setBackground(new java.awt.Color(255, 0, 0));
+        lgdContaNoVermelho.setToolTipText("<html><p><b>Conta poupança:</b> Será bloqueado a transferência quando o saldo estiver zerado!</p>\n<p><b>Conta Corrente:</b> Será bloqueado a transfêrencia quando o saldo usar todo o  limite de crédito;</p></html>");
         lgdContaNoVermelho.setOpaque(true);
 
         lgdContaNoVermelhoTexto.setText("Bloqueada para débito e transferência");
 
         lgdAmarela.setBackground(new java.awt.Color(255, 255, 0));
+        lgdAmarela.setToolTipText("<html><b>Conta Corrente:</b> Legenda ativa quando o saldo for todo utilizado ( 0 ) e começar a utilizar o limite de crédito da conta.</html>");
         lgdAmarela.setOpaque(true);
 
-        lgdAmarelaTexto.setText("Próxima do limite da conta corrente");
+        lgdAmarelaTexto.setText("Utilizando o limite de crédito da  conta");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Legendas:");
+
+        lgdLaranja.setBackground(java.awt.Color.orange);
+        lgdLaranja.setToolTipText("<html><b>Conta Poupança:</b> Legenda ativa quando o saldo da conta poupança estiver zerado.</html>");
+        lgdLaranja.setOpaque(true);
+
+        lgdaranjaTexto.setText("Bloqueada para transferência SP->SC");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -393,7 +398,11 @@ public class PrincipalGUI extends javax.swing.JFrame {
                 .addComponent(lgdAmarela, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lgdAmarelaTexto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 283, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lgdLaranja, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lgdaranjaTexto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lgdHorario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lgdDataHora, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -402,23 +411,18 @@ public class PrincipalGUI extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(lgdContaNoVermelho, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lgdContaNoVermelhoTexto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lgdAmarela, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
-                            .addComponent(lgdAmarelaTexto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(lgdContaNoVermelho, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lgdContaNoVermelhoTexto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lgdAmarela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lgdAmarelaTexto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lgdLaranja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lgdaranjaTexto))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(11, 11, 11)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(lgdDataHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lgdHorario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -427,7 +431,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
 
         jMenu1.setText("Cadastro");
 
-        MnPoupanca.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
+        MnPoupanca.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.SHIFT_MASK));
         MnPoupanca.setText("Contas Poupança");
         MnPoupanca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -436,7 +440,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
         });
         jMenu1.add(MnPoupanca);
 
-        MnContaCorrente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
+        MnContaCorrente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK));
         MnContaCorrente.setText("Conta Corrente");
         MnContaCorrente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -447,8 +451,9 @@ public class PrincipalGUI extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Operações");
+        jMenu2.setText("Operações das contas");
 
+        mnCreditarNaContaPoupanca.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         mnCreditarNaContaPoupanca.setText("Creditar na Conta Poupança");
         mnCreditarNaContaPoupanca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -457,6 +462,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
         });
         jMenu2.add(mnCreditarNaContaPoupanca);
 
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
         jMenuItem5.setText("Creditar Em Poupança");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -465,6 +471,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem5);
 
+        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
         jMenuItem6.setText("Debitar da Conta Poupança");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -473,6 +480,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem6);
 
+        jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
         jMenuItem7.setText("Debitar da Poupança");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -482,6 +490,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
         jMenu2.add(jMenuItem7);
         jMenu2.add(jSeparator1);
 
+        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
         jMenuItem8.setText("Creditar na Conta Corrente");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -490,6 +499,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem8);
 
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F7, 0));
         jMenuItem4.setText("Debitar ContaCorrente");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -497,16 +507,54 @@ public class PrincipalGUI extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem4);
-
-        jMenuItem3.setText("Tranferência entre Contas correntes");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem3);
+        jMenu2.add(jSeparator3);
 
         jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Transferências");
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
+
+        mnTransferenciaEntreCorrentes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F8, 0));
+        mnTransferenciaEntreCorrentes.setText("Tranferência entre Contas correntes");
+        mnTransferenciaEntreCorrentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnTransferenciaEntreCorrentesActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnTransferenciaEntreCorrentes);
+
+        mnTransferenciaCorrentePoupanca.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F9, 0));
+        mnTransferenciaCorrentePoupanca.setText("Transferência de conta Corrente - Poupança");
+        mnTransferenciaCorrentePoupanca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnTransferenciaCorrentePoupancaActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnTransferenciaCorrentePoupanca);
+
+        mnTransferenciaPoupancaCorrente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F10, 0));
+        mnTransferenciaPoupancaCorrente.setText("Transferência de conta Poupança - Corrente");
+        mnTransferenciaPoupancaCorrente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnTransferenciaPoupancaCorrenteActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnTransferenciaPoupancaCorrente);
+
+        mnTransferenciaEntrePoupancas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F11, 0));
+        mnTransferenciaEntrePoupancas.setText("Transferência entre contas Poupanças");
+        mnTransferenciaEntrePoupancas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnTransferenciaEntrePoupancasActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnTransferenciaEntrePoupancas);
+
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -557,7 +605,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private void mnCreditarNaContaPoupancaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCreditarNaContaPoupancaActionPerformed
 
         if (tabelaContaPounca.getRowCount() > 0) {
-            ContasDepositarDebitar operacoesContaPoupanca = new ContasDepositarDebitar(ICONE_LAUNCH, true, 1);
+            ContasDepositarDebitarIG operacoesContaPoupanca = new ContasDepositarDebitarIG(ICONE_LAUNCH, true, 1);
             operacoesContaPoupanca.setModal(true);
             operacoesContaPoupanca.setVisible(true);
 
@@ -565,9 +613,8 @@ public class PrincipalGUI extends javax.swing.JFrame {
             double valorDeposito = operacoesContaPoupanca.getValorCreditado();
 
             if (numerodaconta != null && valorDeposito != 0) {
-                if (poupancaTableModel.verificarChaveContaCorrente(numerodaconta)) {
-
-                    ContaPoupanca cp = poupancaTableModel.getContaPoupanca(numerodaconta);
+                ContaPoupanca cp = poupancaTableModel.getContaPoupanca(numerodaconta);
+                if (cp != null) {
                     operacoesBancarias.creditarContaPoupanca(cp, valorDeposito);
                     poupancaTableModel.updateContaCorrente(cp);
 
@@ -586,7 +633,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
 
         if (tabelaContaPounca.getRowCount() > 0) {
 
-            ContasDepositarDebitar operacoesContaPoupanca = new ContasDepositarDebitar(ICONE_LAUNCH, true, 2);
+            ContasDepositarDebitarIG operacoesContaPoupanca = new ContasDepositarDebitarIG(ICONE_LAUNCH, true, 2);
             operacoesContaPoupanca.setModal(true);
             operacoesContaPoupanca.setVisible(true);
 
@@ -594,9 +641,9 @@ public class PrincipalGUI extends javax.swing.JFrame {
             double valorDeposito = operacoesContaPoupanca.getValorCreditado();
 
             if (numerodaconta != null && valorDeposito != 0) {
-                if (poupancaTableModel.verificarChaveContaCorrente(numerodaconta)) {
+                ContaPoupanca cp = poupancaTableModel.getContaPoupanca(numerodaconta);
+                if (cp != null) {
 
-                    ContaPoupanca cp = poupancaTableModel.getContaPoupanca(numerodaconta);
                     operacoesBancarias.creditarEmPoupanca(cp, valorDeposito);
                     poupancaTableModel.updateContaCorrente(cp);
 
@@ -615,7 +662,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         if (tabelaContaPounca.getRowCount() > 0) {
 
-            ContasDepositarDebitar operacoesContaPoupanca = new ContasDepositarDebitar(ICONE_LAUNCH, true, 3);
+            ContasDepositarDebitarIG operacoesContaPoupanca = new ContasDepositarDebitarIG(ICONE_LAUNCH, true, 3);
             operacoesContaPoupanca.setModal(true);
             operacoesContaPoupanca.setVisible(true);
 
@@ -623,12 +670,10 @@ public class PrincipalGUI extends javax.swing.JFrame {
             double valorDeposito = operacoesContaPoupanca.getValorCreditado();
 
             if (numerodaconta != null && valorDeposito != 0) {
-                if (poupancaTableModel.verificarChaveContaCorrente(numerodaconta)) {
-
-                    ContaPoupanca cp = poupancaTableModel.getContaPoupanca(numerodaconta);
+                ContaPoupanca cp = poupancaTableModel.getContaPoupanca(numerodaconta);
+                if (cp != null) {
                     operacoesBancarias.debitarContaPoupanca(cp, valorDeposito);
                     poupancaTableModel.updateContaCorrente(cp);
-
                 } else {
                     JOptionPane.showMessageDialog(this, "Deposito não efetuado, numero da conta poupança inexistente\nTente Novamente!!!");
                 }
@@ -644,7 +689,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         if (tabelaContaPounca.getRowCount() > 0) {
 
-            ContasDepositarDebitar operacoesContaPoupanca = new ContasDepositarDebitar(ICONE_LAUNCH, true, 4);
+            ContasDepositarDebitarIG operacoesContaPoupanca = new ContasDepositarDebitarIG(ICONE_LAUNCH, true, 4);
             operacoesContaPoupanca.setModal(true);
             operacoesContaPoupanca.setVisible(true);
 
@@ -652,8 +697,8 @@ public class PrincipalGUI extends javax.swing.JFrame {
             double valorDeposito = operacoesContaPoupanca.getValorCreditado();
 
             if (numerodaconta != null && valorDeposito != 0) {
-                if (poupancaTableModel.verificarChaveContaCorrente(numerodaconta)) {
-                    ContaPoupanca cp = poupancaTableModel.getContaPoupanca(numerodaconta);
+                ContaPoupanca cp = poupancaTableModel.getContaPoupanca(numerodaconta);
+                if (cp != null) {
                     operacoesBancarias.debitarDaPoupanca(cp, valorDeposito);
                     poupancaTableModel.updateContaCorrente(cp);
                 } else {
@@ -670,7 +715,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         if (tabelaContaCorrente.getRowCount() > 0) {
 
-            ContasDepositarDebitar operacoesContas = new ContasDepositarDebitar(ICONE_LAUNCH, true, 6);
+            ContasDepositarDebitarIG operacoesContas = new ContasDepositarDebitarIG(ICONE_LAUNCH, true, 6);
             operacoesContas.setModal(true);
             operacoesContas.setVisible(true);
 
@@ -678,12 +723,13 @@ public class PrincipalGUI extends javax.swing.JFrame {
             double valorDeposito = operacoesContas.getValorCreditado();
 
             if (numerodaconta != null && valorDeposito != 0) {
-                if (correnteTableModel.verificarChaveContaCorrente(numerodaconta)) {
-                    ContaCorrente cc = correnteTableModel.getContaCorrente(numerodaconta);
+                ContaCorrente cc = correnteTableModel.getContaCorrente(numerodaconta);
+                if (cc != null) {
+
                     operacoesBancarias.debitarContaCorrente(cc, valorDeposito);
                     correnteTableModel.updateContaCorrente(cc);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Deposito não efetuado, numero da conta poupança inexistente\nTente Novamente!!!");
+                    JOptionPane.showMessageDialog(this, "Deposito não efetuado, numero da conta corrente inexistente\nTente Novamente!!!");
                 }
             }
 
@@ -696,7 +742,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         if (tabelaContaCorrente.getRowCount() > 0) {
 
-            ContasDepositarDebitar operacoesContaPoupanca = new ContasDepositarDebitar(ICONE_LAUNCH, true, 5);
+            ContasDepositarDebitarIG operacoesContaPoupanca = new ContasDepositarDebitarIG(ICONE_LAUNCH, true, 5);
             operacoesContaPoupanca.setModal(true);
             operacoesContaPoupanca.setVisible(true);
 
@@ -704,12 +750,12 @@ public class PrincipalGUI extends javax.swing.JFrame {
             double valorDeposito = operacoesContaPoupanca.getValorCreditado();
 
             if (numerodaconta != null && valorDeposito != 0) {
-                if (correnteTableModel.verificarChaveContaCorrente(numerodaconta)) {
-                    ContaCorrente cc = correnteTableModel.getContaCorrente(numerodaconta);
+                ContaCorrente cc = correnteTableModel.getContaCorrente(numerodaconta);
+                if (cc != null) {
                     operacoesBancarias.creditarContaCorrente(cc, valorDeposito);
                     correnteTableModel.updateContaCorrente(cc);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Deposito não efetuado, numero da conta poupança inexistente\nTente Novamente!!!");
+                    JOptionPane.showMessageDialog(this, "Deposito não efetuado, numero da conta corrente inexistente\nTente Novamente!!!");
                 }
             }
 
@@ -719,11 +765,11 @@ public class PrincipalGUI extends javax.swing.JFrame {
         limparSelecaoTabelas();
             }//GEN-LAST:event_jMenuItem8ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void mnTransferenciaEntreCorrentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTransferenciaEntreCorrentesActionPerformed
 
         if (tabelaContaCorrente.getRowCount() > 1) {
 
-            TransferenciaEntreContasCorrentes transferenciaEntreContasCorrentes = new TransferenciaEntreContasCorrentes(this, true, ICONE_LAUNCH);
+            TransferenciaEntreContasBancariasIG transferenciaEntreContasCorrentes = new TransferenciaEntreContasBancariasIG(this, true, ICONE_LAUNCH, 1);
             transferenciaEntreContasCorrentes.setVisible(true);
 
             String numeroContaOrigem = transferenciaEntreContasCorrentes.getNumeroContaOrigem();
@@ -731,11 +777,11 @@ public class PrincipalGUI extends javax.swing.JFrame {
             double valorDeposito = transferenciaEntreContasCorrentes.getValorTransferencia();
 
             if (numeroContaOrigem != null && valorDeposito != 0 && numeroContaDestino != null) {
-                if (correnteTableModel.verificarChaveContaCorrente(numeroContaOrigem)) {
-                    if (correnteTableModel.verificarChaveContaCorrente(numeroContaDestino)) {
-                        ContaCorrente ccOrigem = correnteTableModel.getContaCorrente(numeroContaOrigem);
-                        ContaCorrente ccDestino = correnteTableModel.getContaCorrente(numeroContaDestino);
+                ContaCorrente ccOrigem = correnteTableModel.getContaCorrente(numeroContaOrigem);
+                ContaCorrente ccDestino = correnteTableModel.getContaCorrente(numeroContaDestino);
 
+                if (ccOrigem != null) {
+                    if (ccDestino != null) {
                         operacoesBancarias.transferenciaBancaria(ccOrigem, ccDestino, valorDeposito);
                         correnteTableModel.updateContaCorrente(ccOrigem);
                         correnteTableModel.updateContaCorrente(ccDestino);
@@ -749,11 +795,11 @@ public class PrincipalGUI extends javax.swing.JFrame {
             }
 
         } else {
-            JOptionPane.showMessageDialog(this, "Impossivel realizar uma transferência!\n\nA transferência só pode ser realizada a partir de 2 contas correntes cadastradas!");
+            JOptionPane.showMessageDialog(this, "Transferência indisponivel no momento!\n\nPara realizar essa operação é necessário\nter pelo menos 2 contas distintas cadastradas!\n[ " + countCorrente + " ] conta correntes.");
         }
         limparSelecaoTabelas();
 
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_mnTransferenciaEntreCorrentesActionPerformed
 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
 
@@ -765,20 +811,19 @@ public class PrincipalGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_formComponentHidden
 
     private void btnAdicionarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarContaActionPerformed
-        TipoContaGUI tipoContaGUI = new TipoContaGUI(ICONE_LAUNCH);
+        TipoContaIG tipoContaGUI = new TipoContaIG(ICONE_LAUNCH);
         tipoContaGUI.setModal(true);
         tipoContaGUI.setVisible(true);
         int tipoConta = tipoContaGUI.getTipoConta();
 
         if (!(tipoConta < 0)) {
-             painelGuiaContas.setSelectedIndex(tipoConta);
+           
             if (tipoConta == 0) {
                 contaPoupancaGUI(null, true);
             } else if (tipoConta == 1) {
                 contaCorrenteGUI(null, true);
             }
 
-           
         }
 
 
@@ -787,7 +832,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         if (painelGuiaContas.getSelectedIndex() == 0) {
             if (tabelaContaPounca.getRowCount() > 0) {
-                if (poupancaTableModel.verificarChaveContaCorrente(numeroDaConta.getText().trim())) {
+                if (poupancaTableModel.getContaPoupanca(numeroDaConta.getText().trim()) != null) {
                     JOptionPane.showMessageDialog(this, "O número da conta poupança: [" + numeroDaConta.getText().trim() + " ] é válido!");
                 }
             } else {
@@ -797,7 +842,8 @@ public class PrincipalGUI extends javax.swing.JFrame {
 
         } else {
             if (tabelaContaCorrente.getRowCount() > 0) {
-                if (correnteTableModel.verificarChaveContaCorrente(numeroDaConta.getText().trim())) {
+                ContaCorrente cc = correnteTableModel.getContaCorrente(numeroDaConta.getText().trim());
+                if (cc != null) {
                     JOptionPane.showMessageDialog(this, "O número da conta corrente: [" + numeroDaConta.getText().trim() + " ] é válido!");
                 }
             } else {
@@ -810,7 +856,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private void painelGuiaContasStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_painelGuiaContasStateChanged
         limparSelecaoTabelas();
         atualizarCountContas(0);
-       
+
     }//GEN-LAST:event_painelGuiaContasStateChanged
 
     private void scrollContaCorrenteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scrollContaCorrenteMouseClicked
@@ -855,8 +901,113 @@ public class PrincipalGUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-       limparSelecaoTabelas();
+        limparSelecaoTabelas();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void mnTransferenciaCorrentePoupancaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTransferenciaCorrentePoupancaActionPerformed
+
+        if (countCorrente > 0 && countPoupanca > 0) {
+            TransferenciaEntreContasBancariasIG tcp = new TransferenciaEntreContasBancariasIG(this, true, ICONE_LAUNCH, 2);
+            tcp.setVisible(true);
+
+            String numeroContaOrigem = tcp.getNumeroContaOrigem();
+            String numeroContaDestino = tcp.getNumeroContaDestino();
+            double valorDeposito = tcp.getValorTransferencia();
+
+            if (numeroContaOrigem != null && valorDeposito != 0 && numeroContaDestino != null) {
+                ContaCorrente ccOrigem = correnteTableModel.getContaCorrente(numeroContaOrigem);
+                ContaPoupanca cpDestino = poupancaTableModel.getContaPoupanca(numeroContaDestino);
+
+                if (ccOrigem != null) {
+                    if (cpDestino != null) {
+
+                        operacoesBancarias.transferenciaCorrenteParaPoupanca(ccOrigem, cpDestino, valorDeposito);
+                        correnteTableModel.updateContaCorrente(ccOrigem);
+                        poupancaTableModel.updateContaCorrente(cpDestino);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Conta de destino inexistente\nTente Novamente!");
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Conta de origem inexistente\nTente Novamente!");
+                }
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Transferência indisponivel no momento!\n\nPara realizar essa operação é necessário\nter pelo menos 2 contas distintas cadastradas!\n[ " + countPoupanca + " ] conta poupança;\n[ " + countCorrente + " ] conta corrente.");
+        }
+    }//GEN-LAST:event_mnTransferenciaCorrentePoupancaActionPerformed
+
+    private void mnTransferenciaPoupancaCorrenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTransferenciaPoupancaCorrenteActionPerformed
+
+        if (countPoupanca > 0 && countCorrente > 0) {
+            TransferenciaEntreContasBancariasIG tpc = new TransferenciaEntreContasBancariasIG(this, true, ICONE_LAUNCH, 3);
+            tpc.setVisible(true);
+
+            String numeroContaOrigem = tpc.getNumeroContaOrigem();
+            String numeroContaDestino = tpc.getNumeroContaDestino();
+            double valorDeposito = tpc.getValorTransferencia();
+
+            if (numeroContaOrigem != null && valorDeposito != 0 && numeroContaDestino != null) {
+                ContaPoupanca cpOrigem = poupancaTableModel.getContaPoupanca(numeroContaOrigem);
+                ContaCorrente ccDestino = correnteTableModel.getContaCorrente(numeroContaDestino);
+
+                if (cpOrigem != null) {
+                    if (ccDestino != null) {
+                        operacoesBancarias.transferenciaPoupancaParaCorrente(cpOrigem, ccDestino, valorDeposito);
+                        poupancaTableModel.updateContaCorrente(cpOrigem);
+                        correnteTableModel.updateContaCorrente(ccDestino);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Conta de destino inexistente\nTente Novamente!");
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Conta de origem inexistente\nTente Novamente!");
+                }
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Transferência indisponivel no momento!\n\nPara realizar essa operação é necessário\nter pelo menos 2 contas distintas cadastradas!\n[ " + countCorrente + " ] conta corrente;\n[ " + countPoupanca + " ] conta poupança.");
+        }
+    }//GEN-LAST:event_mnTransferenciaPoupancaCorrenteActionPerformed
+
+    private void mnTransferenciaEntrePoupancasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTransferenciaEntrePoupancasActionPerformed
+        if (countPoupanca > 1) {
+            TransferenciaEntreContasBancariasIG tpp = new TransferenciaEntreContasBancariasIG(this, true, ICONE_LAUNCH, 4);
+            tpp.setVisible(true);
+
+            String numeroContaOrigem = tpp.getNumeroContaOrigem();
+            String numeroContaDestino = tpp.getNumeroContaDestino();
+            double valorDeposito = tpp.getValorTransferencia();
+
+            if (numeroContaOrigem != null && valorDeposito != 0 && numeroContaDestino != null) {
+
+                ContaPoupanca cpOrigem = poupancaTableModel.getContaPoupanca(numeroContaOrigem);
+                ContaPoupanca cpDestino = poupancaTableModel.getContaPoupanca(numeroContaDestino);
+               
+                if (cpOrigem!=null) {
+                    if (cpDestino!=null) {
+                        operacoesBancarias.transferenciaPoupancaParaPoupanca(cpOrigem, cpDestino, valorDeposito);
+                        poupancaTableModel.updateContaCorrente(cpOrigem);
+                        poupancaTableModel.updateContaCorrente(cpDestino);
+                        System.out.println("Nome: " + cpOrigem.getNome() + " | " + cpOrigem.getSaldo() + " | " + cpDestino.getNome() + " | " + cpDestino.getSaldo());
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Conta de destino inexistente\nTente Novamente!");
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Conta de origem inexistente\nTente Novamente!");
+                }
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Transferência indisponivel no momento!\n\nPara realizar essa operação é necessário\nter pelo menos 2 contas poupanças cadastradas!\n[ " + countPoupanca + " ] conta poupança;");
+        }
+    }//GEN-LAST:event_mnTransferenciaEntrePoupancasActionPerformed
+
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -875,21 +1026,27 @@ public class PrincipalGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PrincipalGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SimuladorDeContasBancariasPrincipalMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PrincipalGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SimuladorDeContasBancariasPrincipalMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PrincipalGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SimuladorDeContasBancariasPrincipalMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PrincipalGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SimuladorDeContasBancariasPrincipalMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PrincipalGUI().setVisible(true);
+                new SimuladorDeContasBancariasPrincipalMain().setVisible(true);
             }
         });
     }
@@ -914,8 +1071,8 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
@@ -925,6 +1082,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lgdAmarela;
@@ -935,7 +1093,13 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lgdCountContas;
     private javax.swing.JLabel lgdDataHora;
     private javax.swing.JLabel lgdHorario;
+    private javax.swing.JLabel lgdLaranja;
+    private javax.swing.JLabel lgdaranjaTexto;
     private javax.swing.JMenuItem mnCreditarNaContaPoupanca;
+    private javax.swing.JMenuItem mnTransferenciaCorrentePoupanca;
+    private javax.swing.JMenuItem mnTransferenciaEntreCorrentes;
+    private javax.swing.JMenuItem mnTransferenciaEntrePoupancas;
+    private javax.swing.JMenuItem mnTransferenciaPoupancaCorrente;
     private javax.swing.JFormattedTextField numeroDaConta;
     private javax.swing.JTabbedPane painelGuiaContas;
     private javax.swing.JScrollPane scrollContaCorrente;
@@ -953,7 +1117,9 @@ public class PrincipalGUI extends javax.swing.JFrame {
     }
 
     private void contaCorrenteGUI(ContaCorrente contaCorrente, boolean cadastro) {
-        ContaCorrenteGUI guicc = new ContaCorrenteGUI(ICONE_LAUNCH, LOCAL_BRASIL);
+         painelGuiaContas.setSelectedIndex(1);
+         
+        ContaCorrenteIG guicc = new ContaCorrenteIG(ICONE_LAUNCH, LOCAL_BRASIL);
         guicc.setContaCorrente(contaCorrente);
         guicc.setModal(true);
         guicc.setVisible(true);
@@ -961,7 +1127,8 @@ public class PrincipalGUI extends javax.swing.JFrame {
 
         if (contaCorrente != null) {
             if (cadastro) {
-                if (!correnteTableModel.verificarChaveContaCorrente(contaCorrente.getNumeroConta().trim())) {
+
+                if (correnteTableModel.getContaCorrente(contaCorrente.getNumeroConta().trim()) == null) {
                     correnteTableModel.addRow(contaCorrente);
                     atualizarCountContas(1);
                     JOptionPane.showMessageDialog(this, "Parabéns " + contaCorrente.getNome() + "\nSua conta Corrente foi criada com sucesso\n");
@@ -978,7 +1145,9 @@ public class PrincipalGUI extends javax.swing.JFrame {
     }
 
     private void contaPoupancaGUI(ContaPoupanca contaPoupanca, boolean cadastro) {
-        ContaPoupancaGUI guiP = new ContaPoupancaGUI(ICONE_LAUNCH, LOCAL_BRASIL);
+        
+         painelGuiaContas.setSelectedIndex(0);
+        ContaPoupancaIG guiP = new ContaPoupancaIG(ICONE_LAUNCH, LOCAL_BRASIL);
         guiP.setContaPoupanca(contaPoupanca);
         guiP.setModal(true);
         guiP.setVisible(true);
@@ -987,9 +1156,9 @@ public class PrincipalGUI extends javax.swing.JFrame {
 
         if (contaPoupanca != null) {
             if (cadastro) {
-                if (!poupancaTableModel.verificarChaveContaCorrente(contaPoupanca.getNumeroConta().trim())) {
+                if (poupancaTableModel.getContaPoupanca(contaPoupanca.getNumeroConta().trim())==null) {
                     poupancaTableModel.addRow(contaPoupanca);
-                     atualizarCountContas(1);
+                    atualizarCountContas(1);
                     JOptionPane.showMessageDialog(this, "Parabéns " + contaPoupanca.getNome() + "\nSua conta poupança foi criada com sucesso\n");
 
                 } else {
@@ -1004,13 +1173,12 @@ public class PrincipalGUI extends javax.swing.JFrame {
     }
 
     private void limparSelecaoTabelas() {
-        if(painelGuiaContas.getSelectedIndex()==0){
+        if (painelGuiaContas.getSelectedIndex() == 0) {
             tabelaContaPounca.clearSelection();
-        }else{
+        } else {
             tabelaContaCorrente.clearSelection();
         }
-        
-        
+
         btnEditarConta.setEnabled(false);
         btnExcluirConta.setEnabled(false);
     }
@@ -1039,7 +1207,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
                 int opcao = JOptionPane.showConfirmDialog(this, cp.getNome() + ", deseja realmente exluir sua conta corrente?\n\nNúmero da conta: [ " + cp.getNumeroConta() + " ]", "Confirmar remoção de conta", JOptionPane.YES_NO_OPTION);
                 if (opcao == JOptionPane.YES_OPTION) {
                     correnteTableModel.deleteContaCorrente(linhaTabelaContaCorrente);
-                     atualizarCountContas(-1);
+                    atualizarCountContas(-1);
                 }
             }
         }
@@ -1051,37 +1219,28 @@ public class PrincipalGUI extends javax.swing.JFrame {
             // aqui tem que tomar cuidado, pois no contrutor o componente tabbepane é criando antes de se instanciar a classe poupancaTableModel e correntTableModel
             countPoupanca += incrementoDecremento;
             lgdCountContas.setText(countPoupanca + "");
-             legendasAmarelasIsVisibleMensagem(Color.ORANGE, MENSAGEM_POUPANCA_SC_CP,MENSAGEM_POUPANCA_SP_SC);
         } else {
             lgdContasTipos.setText("Contas correntes: ");
             // aqui tem que tomar cuidado, pois no contrutor o componente tabbepane é criando antes de se instanciar a classe poupancaTableModel e correntTableModel
-            countCorrente+=incrementoDecremento;
+            countCorrente += incrementoDecremento;
             lgdCountContas.setText(countCorrente + "");
-            legendasAmarelasIsVisibleMensagem(Color.YELLOW,"Bloqueada para débito e transferência" ,"Próxima do limite da conta corrente");
         }
     }
-    
-    
+
     private void atualizarDataHora(LocalDateTime dataLocal) {
-      lgdDataHora.setText(dataLocal.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
+        lgdDataHora.setText(dataLocal.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
     }
-    
-    private void startRelogio(){
+
+    private void startRelogio() {
         Timer relogio = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-               dataLocal = dataLocal.plusSeconds(1);
-               atualizarDataHora(dataLocal);
+                dataLocal = dataLocal.plusSeconds(1);
+                atualizarDataHora(dataLocal);
             }
         });
-        
-        relogio.start();
-    }
 
-    private void legendasAmarelasIsVisibleMensagem(Color b, String mensagemLegendaVermelha,String mensagemLegendaAmarela) {
-        lgdContaNoVermelhoTexto.setText(mensagemLegendaVermelha);
-        lgdAmarela.setBackground(b);
-        lgdAmarelaTexto.setText(mensagemLegendaAmarela);
+        relogio.start();
     }
 
 }

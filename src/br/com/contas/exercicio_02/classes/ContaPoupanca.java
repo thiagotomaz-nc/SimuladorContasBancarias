@@ -1,7 +1,5 @@
 package br.com.contas.exercicio_02.classes;
 
-import br.com.contas.exercicio_02.classes.ContaBancaria;
-
 public class ContaPoupanca extends ContaBancaria {
 
     private double saldoPoupanca = 0;
@@ -13,5 +11,17 @@ public class ContaPoupanca extends ContaBancaria {
     public void setSaldoPoupanca(double saldoPoupanca) {
         this.saldoPoupanca = saldoPoupanca;
     }
+
+    @Override
+    public String showSaldo() {
+       return "Olá, " + getNome() + ", seu saldo total é R$ " + (getSaldo()) + " reais.";
+    }
+
+    @Override
+    public double getValorInternoConta() {
+      return saldoPoupanca;
+    }
+    
+    
 
 }

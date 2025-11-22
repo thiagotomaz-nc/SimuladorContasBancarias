@@ -1,9 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *Componentes:
+*   Emanuel Basílio da Silva (20251134040033) 
+    Matheus do Nascimento da Silva (20251134040023)
+    RENATO ARAUJO GRILO (20251134040018)
+    Thiago Tomaz de Araújo (20251134040031)
  */
-package br.com.contas.exercicio_02.windows;
+package br.com.contas.exercicio_02.janelas;
 
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -14,7 +16,7 @@ import javax.swing.border.LineBorder;
  *
  * @author Thiago Tomaz
  */
-public class ContasDepositarDebitar extends javax.swing.JDialog {
+public class ContasDepositarDebitarIG extends javax.swing.JDialog {
 
     /**
      * Creates new form OperacoesContaPoupanca
@@ -23,7 +25,7 @@ public class ContasDepositarDebitar extends javax.swing.JDialog {
     private double valorCreditado;
     private int tipoOperacao;
 
-    public ContasDepositarDebitar(String iconeLaunch, boolean modal, int tipoOperacao) {
+    public ContasDepositarDebitarIG(String iconeLaunch, boolean modal, int tipoOperacao) {
 
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(iconeLaunch));

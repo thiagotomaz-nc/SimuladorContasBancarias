@@ -1,9 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *Componentes:
+*   Emanuel Basílio da Silva (20251134040033) 
+    Matheus do Nascimento da Silva (20251134040023)
+    RENATO ARAUJO GRILO (20251134040018)
+    Thiago Tomaz de Araújo (20251134040031)
  */
-package br.com.contas.exercicio_02.windows;
+package br.com.contas.exercicio_02.janelas;
 
 import br.com.contas.exercicio_02.classes.ContaCorrente;
 import java.awt.Color;
@@ -15,19 +17,19 @@ import javax.swing.border.LineBorder;
 
 /**
  *
- * @author thiago
+ * @author Thiago Tomaz
  */
-public class ContaCorrenteGUI extends javax.swing.JDialog {
+public class ContaCorrenteIG extends javax.swing.JDialog {
 
     /**
-     * Creates new form contaPoupanca
+     * Creates new form ContaCorrenteIG
      */
     private NumberFormat formatoMoedaBrasil;
-    public ContaCorrenteGUI(String iconeLaunch, Locale local) {
+    public ContaCorrenteIG(String iconeLaunch, Locale local) {
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(iconeLaunch));
-        Locale localPTBR = local;
-        formatoMoedaBrasil = NumberFormat.getCurrencyInstance(localPTBR);
+       // Locale localPTBR = local;
+       // formatoMoedaBrasil = NumberFormat.getCurrencyInstance(localPTBR);
 
     }
 
@@ -116,8 +118,9 @@ public class ContaCorrenteGUI extends javax.swing.JDialog {
             ex.printStackTrace();
         }
 
-        txtSaldoContaCorrente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
-        txtSaldoContaCorrente.setText("R$ 0,00");
+        txtSaldoContaCorrente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtSaldoContaCorrente.setText("0,00");
+        txtSaldoContaCorrente.setToolTipText("");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -252,8 +255,8 @@ public class ContaCorrenteGUI extends javax.swing.JDialog {
             txtNumeroDaConta.setEditable(false);
             txtNumeroDaConta.setEnabled(false);
             txtNomeContaCorrente.setText(cc.getNome());
-            txtSaldoContaCorrente.setText(formatoMoedaBrasil.format(cc.getSaldo()));
-            txtlimiteContaCorrente.setText(formatoMoedaBrasil.format(cc.getLimiteCredito()));
+            txtSaldoContaCorrente.setText(cc.getSaldo()+"");
+            txtlimiteContaCorrente.setText(cc.getLimiteCredito()+"");
             
             btnSalvarEditar.setText("Atualizar Cadastro");
             cc = null;

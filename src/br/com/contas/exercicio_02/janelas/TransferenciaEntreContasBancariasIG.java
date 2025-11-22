@@ -1,9 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *Componentes:
+*   Emanuel Basílio da Silva (20251134040033) 
+    Matheus do Nascimento da Silva (20251134040023)
+    RENATO ARAUJO GRILO (20251134040018)
+    Thiago Tomaz de Araújo (20251134040031)
  */
-package br.com.contas.exercicio_02.windows;
+package br.com.contas.exercicio_02.janelas;
 
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -14,20 +16,40 @@ import javax.swing.border.LineBorder;
  *
  * @author Thiago Tomaz
  */
-public class TransferenciaEntreContasCorrentes extends javax.swing.JDialog {
+public class TransferenciaEntreContasBancariasIG extends javax.swing.JDialog {
 
     /**
      * Creates new form TransferenciaEntreContasCorrentes
      */
     private String numeroContaOrigem, numeroContaDestino;
     private double valorTransferencia;
-    public TransferenciaEntreContasCorrentes(java.awt.Frame parent, boolean modal, String iconeLaunch) {
+
+    public TransferenciaEntreContasBancariasIG(java.awt.Frame parent, boolean modal, String iconeLaunch, int tipoTransferencia) {
         super(parent, modal);
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(iconeLaunch));
-        numeroContaDestino=null;
+        numeroContaDestino = null;
         numeroContaOrigem = null;
-        valorTransferencia=0;
+        valorTransferencia = 0;
+
+        switch (tipoTransferencia) {
+            case 1:
+                setTitle("Transferir de conta corrente para corrente");
+                break;
+            case 2:
+                setTitle("Transferir de conta corrente para poupança");
+                break;
+            case 3:
+                setTitle("Transferir de conta poupança para corrente");
+                break;
+            case 4:
+                setTitle("Transferir de conta poupança para poupança");
+                break;
+            default:
+                setTitle("Realizar uma transferência");
+                break;
+        }
+
     }
 
     /**
@@ -105,7 +127,7 @@ public class TransferenciaEntreContasCorrentes extends javax.swing.JDialog {
         });
 
         btnSalvarEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icones_32/check.png"))); // NOI18N
-        btnSalvarEditar.setText("Cadastrar conta");
+        btnSalvarEditar.setText("Realizar transferncia");
         btnSalvarEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarEditarActionPerformed(evt);
@@ -119,7 +141,7 @@ public class TransferenciaEntreContasCorrentes extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(71, 131, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -134,17 +156,17 @@ public class TransferenciaEntreContasCorrentes extends javax.swing.JDialog {
                                     .addComponent(txtNumeroDaContaOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 105, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnSalvarEditar))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtValorTransferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(32, Short.MAX_VALUE))
+                                .addComponent(txtValorTransferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSalvarEditar)))))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,27 +212,29 @@ public class TransferenciaEntreContasCorrentes extends javax.swing.JDialog {
         btnSalvarEditar.hasFocus();
 
         if (!txtNumeroDaContaOrigem.getText().trim().toUpperCase().isEmpty() && !txtNumeroDaContaDestino.getText().trim().isEmpty() && !txtValorTransferencia.getText().trim().isEmpty()) {
-            if (txtNumeroDaContaOrigem.getText().trim().length() == 8 && txtNumeroDaContaDestino.getText().trim().length()==8) {
+            if (txtNumeroDaContaOrigem.getText().trim().length() == 8 && txtNumeroDaContaDestino.getText().trim().length() == 8) {
 
                 //implementar o NumberFormat para trabalhar com moedas
-                String tempValor = txtValorTransferencia.getText().trim().replace("R$","").replace(" ", "").replace(".", "").replace(",", ".");
+                String tempValor = txtValorTransferencia.getText().trim().replace("R$", "").replace(" ", "").replace(".", "").replace(",", ".");
 
                 double valorTransferencia = Double.parseDouble(tempValor);
-                
-                if (valorTransferencia==0) valorTransferencia=0;
-               
+
+                if (valorTransferencia == 0) {
+                    valorTransferencia = 0;
+                }
+
                 // só existe uma transferencia acima de 0 reais.
                 if (valorTransferencia > 0) {
                     numeroContaOrigem = txtNumeroDaContaOrigem.getText().trim();
                     numeroContaDestino = txtNumeroDaContaDestino.getText().trim();
                     this.valorTransferencia = valorTransferencia;
-                    
+
                     dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Por favor, preencha o saldo com valor acima de R$ 0 reais!");
 
                 }
-            }else {
+            } else {
                 JOptionPane.showMessageDialog(this, "O campo numero da conta tem que estar completamente preenchido");
                 txtNumeroDaContaOrigem.setBorder(new LineBorder(Color.RED, 2));
                 txtNumeroDaContaDestino.setBorder(new LineBorder(Color.RED, 2));
@@ -223,7 +247,6 @@ public class TransferenciaEntreContasCorrentes extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalvarEditar;
@@ -261,6 +284,5 @@ public class TransferenciaEntreContasCorrentes extends javax.swing.JDialog {
     public void setValorTransferencia(double valorTransferencia) {
         this.valorTransferencia = valorTransferencia;
     }
-
 
 }

@@ -113,16 +113,5 @@ public class CorrenteTableModel extends AbstractTableModel {
         this.fireTableDataChanged();
     }
     
-    public boolean verificarChaveContaCorrente(String Chave) {
-        return listaContasCorrentes.containsKey(Chave);
-        //nesse caso tbm poderia utilizar o arraylist que contem as chaves
-        //return listasChaves.indexOf(Chave);
-        // OBS.: teria que alterar o retorno do metodo de boolean para integer,
-        //pois o indexof retorna -1 caso não encontre a chave e se encontrar ele retorne a posição onde ela se esta armazenada na lista;
-    }
-    
-    
-    
-  
-
+ 
 }

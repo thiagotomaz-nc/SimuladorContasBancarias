@@ -20,7 +20,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class PoupancaTableModel extends AbstractTableModel {
     
-    //a questão a analisar depois, é que ao utilizar um hashmap junto com o arraylist eu tenho 2 vezes o cadastro do numero da conta, ou seja uma duplicidade.
+    //posteriormente, analisar a seguinte questão! , Ao utilizar um HasMap combinado com o ArrayList,  se tem uma duplicidade da utilização do número da conta, sendo assim, é bom analisar outra forma contornar essa situação.
     private HashMap<String, ContaPoupanca> listaContasPoupanca;
     private ArrayList<String> listaChavesPoupanca;
     private String[] colunasPoupanca = {"id","Número da conta", "Nome do titular","Saldo","Saldo da poupança" };
@@ -112,14 +112,6 @@ public class PoupancaTableModel extends AbstractTableModel {
     public void updateContaCorrente(ContaPoupanca contaPoupanca){
         listaContasPoupanca.replace(contaPoupanca.getNumeroConta(), contaPoupanca);  
         this.fireTableDataChanged();
-    }
-    
-    public boolean verificarChaveContaCorrente(String Chave) {
-        return listaContasPoupanca.containsKey(Chave);
-        //nesse caso tbm poderia utilizar o arraylist que contem as chaves
-        //return listasChaves.indexOf(Chave);
-        // OBS.: teria que alterar o retorno do metodo de boolean para integer,
-        //pois o indexof retorna -1 caso não encontre a chave e se encontrar ele retorne a posição onde ela se esta armazenada na lista;
     }
     
     

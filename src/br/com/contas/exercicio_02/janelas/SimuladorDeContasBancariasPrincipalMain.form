@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.8" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.JSeparator" name="jSeparator2">
     </Component>
@@ -18,7 +18,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="MnPoupanca">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="F3"/>
+                  <KeyStroke key="Shift+P"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Contas Poupan&#xe7;a"/>
               </Properties>
@@ -29,7 +29,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="MnContaCorrente">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="F4"/>
+                  <KeyStroke key="Shift+C"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Conta Corrente"/>
               </Properties>
@@ -41,11 +41,14 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Opera&#xe7;&#xf5;es"/>
+            <Property name="text" type="java.lang.String" value="Opera&#xe7;&#xf5;es das contas"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mnCreditarNaContaPoupanca">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="F2"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Creditar na Conta Poupan&#xe7;a"/>
               </Properties>
               <Events>
@@ -54,6 +57,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="F3"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Creditar Em Poupan&#xe7;a"/>
               </Properties>
               <Events>
@@ -62,6 +68,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="F4"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Debitar da Conta Poupan&#xe7;a"/>
               </Properties>
               <Events>
@@ -70,6 +79,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="F5"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Debitar da Poupan&#xe7;a"/>
               </Properties>
               <Events>
@@ -80,6 +92,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="F6"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Creditar na Conta Corrente"/>
               </Properties>
               <Events>
@@ -88,18 +103,69 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="F7"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Debitar ContaCorrente"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem4ActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator3">
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Transfer&#xea;ncias"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenu3ActionPerformed"/>
+          </Events>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mnTransferenciaEntreCorrentes">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="F8"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Tranfer&#xea;ncia entre Contas correntes"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnTransferenciaEntreCorrentesActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnTransferenciaCorrentePoupanca">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="F9"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Transfer&#xea;ncia de conta Corrente - Poupan&#xe7;a"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnTransferenciaCorrentePoupancaActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnTransferenciaPoupancaCorrente">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="F10"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Transfer&#xea;ncia de conta Poupan&#xe7;a - Corrente"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnTransferenciaPoupancaCorrenteActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnTransferenciaEntrePoupancas">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="F11"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Transfer&#xea;ncia entre contas Poupan&#xe7;as"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnTransferenciaEntrePoupancasActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -251,7 +317,7 @@
                   <Component id="btnPesquisar" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="319" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -426,7 +492,11 @@
                   <Component id="lgdAmarela" min="-2" pref="20" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lgdAmarelaTexto" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="283" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="lgdLaranja" min="-2" pref="20" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="lgdaranjaTexto" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="lgdHorario" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="lgdDataHora" min="-2" pref="130" max="-2" attributes="0"/>
@@ -437,30 +507,20 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="lgdContaNoVermelho" min="-2" pref="20" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="lgdContaNoVermelhoTexto" alignment="1" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="lgdAmarela" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jLabel3" alignment="1" pref="20" max="32767" attributes="0"/>
-                              <Component id="lgdAmarelaTexto" alignment="1" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="2" attributes="0">
+                      <Component id="lgdContaNoVermelho" alignment="2" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="lgdContaNoVermelhoTexto" alignment="2" max="32767" attributes="0"/>
+                      <Component id="lgdAmarela" alignment="2" max="32767" attributes="0"/>
+                      <Component id="lgdAmarelaTexto" alignment="2" max="32767" attributes="0"/>
+                      <Component id="jLabel3" alignment="2" max="32767" attributes="0"/>
+                      <Component id="lgdLaranja" alignment="2" max="32767" attributes="0"/>
+                      <Component id="lgdaranjaTexto" alignment="2" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Component id="lgdDataHora" alignment="1" max="32767" attributes="0"/>
                       <Component id="lgdHorario" alignment="1" max="32767" attributes="0"/>
@@ -493,6 +553,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="ff" type="rgb"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&lt;p&gt;&lt;b&gt;Conta poupan&#xe7;a:&lt;/b&gt; Ser&#xe1; bloqueado a transfer&#xea;ncia quando o saldo estiver zerado!&lt;/p&gt;&#xa;&lt;p&gt;&lt;b&gt;Conta Corrente:&lt;/b&gt; Ser&#xe1; bloqueado a transf&#xea;rencia quando o saldo usar todo o  limite de cr&#xe9;dito;&lt;/p&gt;&lt;/html&gt;"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
         </Component>
@@ -506,12 +567,13 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="ff" red="ff" type="rgb"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Conta Corrente:&lt;/b&gt; Legenda ativa quando o saldo for todo utilizado ( 0 ) e come&#xe7;ar a utilizar o limite de cr&#xe9;dito da conta.&lt;/html&gt;"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lgdAmarelaTexto">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Pr&#xf3;xima do limite da conta corrente"/>
+            <Property name="text" type="java.lang.String" value="Utilizando o limite de cr&#xe9;dito da  conta"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
@@ -520,6 +582,20 @@
               <Font name="Tahoma" size="11" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Legendas:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lgdLaranja">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="c8" id="orange" palette="1" red="ff" type="palette"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Conta Poupan&#xe7;a:&lt;/b&gt; Legenda ativa quando o saldo da conta poupan&#xe7;a estiver zerado.&lt;/html&gt;"/>
+            <Property name="opaque" type="boolean" value="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lgdaranjaTexto">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Bloqueada para transfer&#xea;ncia SP-&gt;SC"/>
           </Properties>
         </Component>
       </SubComponents>

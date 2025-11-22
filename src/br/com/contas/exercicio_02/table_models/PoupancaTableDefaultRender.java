@@ -31,8 +31,8 @@ public class PoupancaTableDefaultRender extends DefaultTableCellRenderer {
         Color corBackground = Color.WHITE;
         Color corFontes = Color.BLACK;
 
-        double saldo = Double.parseDouble(objeto.toString().replace("R$", "").replace(" ", "").replace(",", "."));
-        double saldoPoupanca = Double.parseDouble(objetoSSaldoPoupanca.toString().replace("R$", "").replace(" ", "").replace(",", "."));
+        double saldo = Double.parseDouble(objeto.toString().replace("R$", "").replace(" ", "").replace(".", "").replace(",", "."));
+        double saldoPoupanca = Double.parseDouble(objetoSSaldoPoupanca.toString().replace("R$", "").replace(" ", "").replace(".", "").replace(",", "."));
 
         if (isSelected) {
             corBackground = Color.decode("#c59ae5");
